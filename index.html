@@ -119,17 +119,33 @@
   .btn-full:disabled{opacity:.4;cursor:not-allowed;}
 
   label{display:block;font-size:.82rem;font-weight:600;opacity:.85;margin:14px 0 6px;}
+
+  /* ===== Campos de data e horário (corrigido para iPhone/Safari) ===== */
   input[type=date],input[type=time]{
     width:100%;
+    -webkit-min-logical-width:100%;
+    -webkit-appearance:none;
+    appearance:none;
+    color-scheme:dark;
     background:var(--card-2);
     border:1px solid rgba(255,255,255,.15);
     color:var(--cream);
     border-radius:12px;
     padding:11px 12px;
+    min-height:44px;
     font-family:'Nunito',sans-serif;
     font-size:.95rem;
+    box-sizing:border-box;
   }
-  input::-webkit-calendar-picker-indicator{filter:invert(1);opacity:.8;}
+  input::-webkit-calendar-picker-indicator{
+    filter:invert(1);
+    opacity:.8;
+    -webkit-appearance:none;
+  }
+  input[type=date]::-webkit-date-and-time-value,
+  input[type=time]::-webkit-date-and-time-value{
+    text-align:left;
+  }
 
   .grid {
     display: grid;
@@ -145,11 +161,6 @@
   .btn {
     max-width: 100%;
     white-space: normal;
-  }
-
-  input[type="date"], input[type="time"] {
-    min-width: 0;
-    max-width: 100%;
   }
 
   @media (max-width: 480px) {
@@ -200,6 +211,13 @@
 
     .details {
       overflow-wrap: anywhere;
+    }
+
+    input[type=date], input[type=time] {
+      width: 100% !important;
+      -webkit-min-logical-width: 100%;
+      box-sizing: border-box;
+      font-size: 16px; /* evita zoom automático do iOS ao focar no campo */
     }
   }
 
